@@ -194,10 +194,10 @@ public class EasyTextView  extends AppCompatTextView implements ViewType {
 
     }
 
-    //因为可能会set很多参数，因此这里采取10毫秒延迟检查，在16ms内，不影响.
+    //因为可能会set很多参数，因此这里采取11毫秒延迟检查，在16ms内，不影响.
     private void applyValue() {
         removeCallbacks(applyRunnable);
-        postDelayed(applyRunnable, 10);
+        postDelayed(applyRunnable, 11);
     }
 
 

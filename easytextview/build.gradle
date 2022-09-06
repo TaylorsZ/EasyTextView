@@ -1,12 +1,11 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
 }
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.wangdaben.easytextview"
         minSdk 22
         targetSdk 31
         versionCode 1
