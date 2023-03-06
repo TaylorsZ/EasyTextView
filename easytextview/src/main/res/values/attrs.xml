@@ -16,6 +16,7 @@
         <attr name="backgroundColor" format="color" />
         <attr name="backgroundPressedColor" format="color" />
         <attr name="backgroundDisableColor" format="color" />
+        <attr name="backgroundSelectedColor" format="color" />
         <attr name="corner_radius_value" format="dimension" />
         <attr name="corner_topLeftRadius" format="dimension" />
         <attr name="corner_topRightRadius" format="dimension" />

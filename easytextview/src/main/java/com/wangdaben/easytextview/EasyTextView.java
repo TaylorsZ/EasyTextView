@@ -50,12 +50,14 @@ public class EasyTextView  extends AppCompatTextView implements ViewType {
 
     int normalTextColor = Color.WHITE;
     int pressedTextColor = normalTextColor;
+    int selectedTextColor = normalTextColor;
     int disableTextColor = Color.GRAY;
 
     int strokeColor = Color.TRANSPARENT;
     int normalBackgroundColor = Color.TRANSPARENT;
     int pressedBackgroundColor;
     int disableBackgroundColor;
+    int selectedBackgroundColor;
 
     boolean strokeMode;
     boolean pressWithStrokeMode = true;
@@ -154,6 +156,7 @@ public class EasyTextView  extends AppCompatTextView implements ViewType {
         normalBackgroundColor = a.getColor(R.styleable.EasyTextView_backgroundColor, normalBackgroundColor);
         pressedBackgroundColor = a.getColor(R.styleable.EasyTextView_backgroundPressedColor, brightnessColor(normalBackgroundColor, DEFAULT_BRIGHTNESS));
         disableBackgroundColor = a.getColor(R.styleable.EasyTextView_backgroundDisableColor, ColorUtils.setAlphaComponent(normalBackgroundColor,80));
+        selectedBackgroundColor = a.getColor(R.styleable.EasyTextView_backgroundSelectedColor, normalBackgroundColor);
 
         strokeMode = a.getBoolean(R.styleable.EasyTextView_strokeMode, false);
         pressWithStrokeMode = a.getBoolean(R.styleable.EasyTextView_pressWithStrokeMode, pressWithStrokeMode);
@@ -218,22 +221,23 @@ public class EasyTextView  extends AppCompatTextView implements ViewType {
             pressedDrawable.setColor(pressedBackgroundColor);
         }
         GradientDrawable disableDrawable = generateDrawable(shape, disableBackgroundColor);
-
+        GradientDrawable selectedDrawable = generateDrawable(shape, selectedBackgroundColor);
 
         StateListDrawable backgroundStateListDrawable = new StateListDrawable();
-
         backgroundStateListDrawable.addState(new int[]{android.R.attr.state_pressed}, pressedDrawable);
         backgroundStateListDrawable.addState(new int[]{android.R.attr.state_focused}, pressedDrawable);
         backgroundStateListDrawable.addState(new int[]{-android.R.attr.state_enabled}, disableDrawable);
+        backgroundStateListDrawable.addState(new int[]{-android.R.attr.state_selected}, selectedDrawable);
         backgroundStateListDrawable.addState(new int[]{}, normalDrawable);
 
         int[][] textColorState = new int[4][];
         textColorState[0] = new int[]{android.R.attr.state_pressed};
         textColorState[1] = new int[]{android.R.attr.state_focused};
         textColorState[2] = new int[]{-android.R.attr.state_enabled};
-        textColorState[3] = new int[]{};
+        textColorState[3] = new int[]{android.R.attr.state_selected};
+        textColorState[4] = new int[]{};
 
-        int[] textColors = {pressedTextColor, pressedTextColor, disableTextColor, normalTextColor};
+        int[] textColors = {pressedTextColor, pressedTextColor, disableTextColor, selectedTextColor,normalTextColor};
         setBackground(backgroundStateListDrawable);
         setTextColor(new ColorStateList(textColorState, textColors));
     }
@@ -430,6 +434,16 @@ public class EasyTextView  extends AppCompatTextView implements ViewType {
         this.disableBackgroundColor = disableBackgroundColor;
         applyValue();
         return this;
+    }
+
+    public EasyTextView setSelectedBackgroundColor(int selectedBackgroundColor) {
+        this.selectedBackgroundColor = selectedBackgroundColor;
+        applyValue();
+        return this;
+    }
+
+    public int getSelectedBackgroundColor() {
+        return selectedBackgroundColor;
     }
 
     public boolean isStrokeMode() {
