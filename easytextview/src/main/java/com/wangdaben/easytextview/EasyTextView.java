@@ -230,7 +230,7 @@ public class EasyTextView  extends AppCompatTextView implements ViewType {
         backgroundStateListDrawable.addState(new int[]{-android.R.attr.state_selected}, selectedDrawable);
         backgroundStateListDrawable.addState(new int[]{}, normalDrawable);
 
-        int[][] textColorState = new int[4][];
+        int[][] textColorState = new int[5][];
         textColorState[0] = new int[]{android.R.attr.state_pressed};
         textColorState[1] = new int[]{android.R.attr.state_focused};
         textColorState[2] = new int[]{-android.R.attr.state_enabled};
